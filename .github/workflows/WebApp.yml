@@ -15,19 +15,19 @@ jobs:
     - name: Docker Login
       uses: docker/login-action@v2.1.0
       with:
-        username: fruocco
+        username: ernestobv
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKER_TOKEN }}
     
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run:
-        docker build . --file WebApp.Dockerfile --tag fruocco/oai-embeddings:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
-        docker tag fruocco/oai-embeddings:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER fruocco/oai-embeddings:latest;
-        docker push fruocco/oai-embeddings:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
-        docker push fruocco/oai-embeddings:latest;
+        docker build . --file WebApp.Dockerfile --tag ernestobv/oai-embeddings:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
+        docker tag ernestobv/oai-embeddings:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER ernestobv/oai-embeddings:latest;
+        docker push ernestobv/oai-embeddings:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
+        docker push ernestobv/oai-embeddings:latest;
         
-        docker build . --file BatchProcess.Dockerfile --tag fruocco/oai-batch:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
-        docker tag fruocco/oai-batch:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER fruocco/oai-batch:latest;
-        docker push fruocco/oai-batch:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
-        docker push fruocco/oai-batch:latest;
+        docker build . --file BatchProcess.Dockerfile --tag ernestobv/oai-batch:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
+        docker tag ernestobv/oai-batch:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER ernestobv/oai-batch:latest;
+        docker push ernestobv/oai-batch:$(date +'%Y-%m-%d')_$GITHUB_RUN_NUMBER;
+        docker push ernestobv/oai-batch:latest;
