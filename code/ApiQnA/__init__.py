@@ -16,7 +16,7 @@ def main(req: azure.functions.HttpRequest) -> str:
         logging.info ("ApiQnA str(type(req_body)): " + str(type(req_body)))
         req_body = json.loads(req_body)
     except ValueError as error:
-        logging.info("ApiQnA an exception occurred:", error) 
+        logging.info("ApiQnA an exception occurred:" + str(error)) 
         pass
     else:
         logging.info ("ApiQnA 2")
