@@ -18,17 +18,28 @@ def main(req: azure.functions.HttpRequest) -> str:
 
         logging.info ("ApiQnA str(req_body): " + str(req_body))
         logging.info ("ApiQnA str(type(req_body)): " + str(type(req_body)))
-        req_body = json.loads(req_body)
     except ValueError as error:
         logging.info("ApiQnA an exception occurred:" + str(error)) 
+        # Si dejamos el pass, nos comemops el error, porque luego al inicializar el LLMHelper daría un error
+        # Ya de paso quito el else, para que se ejecute siempre que no error esa parte
+        #pass
+        raise error
+    #else:
+
+    logging.info ("ApiQnA 2")
+    question = req_body.get('question')
+    history = req_body.get('history', [])
+    custom_prompt = req_body.get('custom_prompt', "")
+    custom_temperature = float(req_body.get('custom_temperature', os.getenv("OPENAI_TEMPERATURE", 0.7)))
+    
+    try:
+        logging.info ("ApiQnA question: " + str(question))
+        logging.info ("ApiQnA history: " + str(history))
+        logging.info ("ApiQnA custom_prompt: " + str(custom_prompt))
+        logging.info ("ApiQnA custom_temperature: " + str(custom_temperature))
+    except: 
         pass
-    else:
-        logging.info ("ApiQnA 2")
-        question = req_body.get('question')
-        history = req_body.get('history', [])
-        custom_prompt = req_body.get('custom_prompt', "")
-        custom_temperature = float(req_body.get('custom_temperature', os.getenv("OPENAI_TEMPERATURE", 0.7)))
-    logging.info ("ApiQnA 3")
+
     # Create LLMHelper object
     llm_helper = LLMHelper(custom_prompt=custom_prompt, temperature=custom_temperature)
     # Get answer
