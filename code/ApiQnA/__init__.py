@@ -12,7 +12,11 @@ def main(req: azure.functions.HttpRequest) -> str:
     # Get data from POST request
     try:
         req_body = req.get_json()
-        logging.info ("ApiQnA req_body: " + req_body)
+        if type(req_body) == str:
+            logging.info("ApiQnA - body is not a json. Body: " + req_body)
+            raise Exception("ApiQnA - body is not a json")
+
+        logging.info ("ApiQnA str(req_body): " + str(req_body))
         logging.info ("ApiQnA str(type(req_body)): " + str(type(req_body)))
         req_body = json.loads(req_body)
     except ValueError as error:
