@@ -27,5 +27,5 @@ def main(req: azure.functions.HttpRequest) -> str:
     data = {}
     data['question'], data['response'], data['context'], data["sources"] = llm_helper.get_semantic_answer_lang_chain(question, history)
     # Return answer
-    print ("ApiQnA 5")
+    print ("ApiQnA 5 Fin")
     return f'{data}'
