@@ -160,26 +160,9 @@
   "resources": [
     {
       "apiVersion": "2020-06-01",
-      "name": "[parameters('HostingPlanName')]",
-      "type": "Microsoft.Web/serverfarms",
-      "location": "[resourceGroup().location]",
-      "sku": {
-        "name": "[parameters('HostingPlanSku')]"
-      },
-      "properties": {
-        "name": "[parameters('HostingPlanName')]",
-        "reserved": true
-      },
-      "kind": "linux"
-    },
-    {
-      "apiVersion": "2020-06-01",
       "name": "[parameters('WebsiteName')]",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', parameters('HostingPlanName'))]"
-      ],
       "properties": {
         "serverFarmId": "[parameters('HostingPlanName')]",
         "siteConfig": {
@@ -194,11 +177,6 @@
       "kind": "functionapp,linux",
       "location": "[resourceGroup().location]",
       "tags": {},
-      "dependsOn": [
-        "[concat('Microsoft.Web/serverfarms/', parameters('HostingPlanName'))]",
-        "[concat('Microsoft.Storage/storageAccounts/', parameters('StorageAccountName'))]",
-        "[concat('Microsoft.Insights/components/', parameters('ApplicationInsightsName'))]"
-      ],
       "properties": {
         "name": "[parameters('FunctionName')]",
         "siteConfig": {
@@ -325,8 +303,7 @@
       "name": "[format('{0}/{1}', parameters('WebsiteName'), 'appsettings')]",
       "kind": "string",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('WebsiteName'))]",
-        "[concat('Microsoft.Insights/components/', parameters('ApplicationInsightsName'))]"
+        "[resourceId('Microsoft.Web/sites', parameters('WebsiteName'))]"
       ],
       "properties": {
         "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', parameters('ApplicationInsightsName')), '2015-05-01').InstrumentationKey]",
