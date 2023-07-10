@@ -160,6 +160,20 @@
   "resources": [
     {
       "apiVersion": "2020-06-01",
+      "name": "[parameters('HostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('HostingPlanSku')]"
+      },
+      "properties": {
+        "name": "[parameters('HostingPlanName')]",
+        "reserved": true
+      },
+      "kind": "linux"
+    },
+    {
+      "apiVersion": "2020-06-01",
       "name": "[parameters('WebsiteName')]",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
