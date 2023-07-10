@@ -467,7 +467,8 @@
         "TRANSLATE_ENDPOINT": "https://api.cognitive.microsofttranslator.com/",
         "TRANSLATE_KEY": "[listKeys(concat('Microsoft.CognitiveServices/accounts/', parameters('TranslatorName')), '2023-05-01').key1]",
         "TRANSLATE_REGION": "[resourceGroup().location]",
-        "CONVERT_ADD_EMBEDDINGS_URL": "[concat('https://', parameters('FunctionName') , '.azurewebsites.net/api/BatchStartProcessing?code=', variables('ClientKey'))]"
+        "CONVERT_ADD_EMBEDDINGS_URL": "[concat('https://', parameters('FunctionName') , '.azurewebsites.net/api/BatchStartProcessing?code=', variables('ClientKey'))]",
+        "FUNCTION_CLIENT_KEY": "[variables('ClientKey')]"
       }
     },
     {
