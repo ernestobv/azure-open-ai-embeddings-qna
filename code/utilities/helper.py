@@ -110,6 +110,7 @@ class LLMHelper:
 
     def add_embeddings_lc(self, source_url):
         try:
+            logging.error(f"Starting add_embeddings_lc for source_url: {source_url}")
             documents = self.document_loaders(source_url).load()
             
             # Convert to UTF-8 encoding for non-ascii text
