@@ -114,7 +114,7 @@
     },
     "OpenAIEngine": {
       "type": "string",
-      "defaultValue": "gpt-35-turbo",
+      "defaultValue": "gpt-4",
       "metadata": {
         "description": "OpenAI Engine"
       }
