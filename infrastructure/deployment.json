@@ -128,7 +128,7 @@
     },
     "OpenAITemperature": {
       "type": "string",
-      "defaultValue": "0.7",
+      "defaultValue": "0.0",
       "metadata": {
         "description": "OpenAI Temperature"
       }

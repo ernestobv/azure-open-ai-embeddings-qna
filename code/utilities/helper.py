@@ -63,7 +63,7 @@ class LLMHelper:
         self.model: str = os.getenv('OPENAI_EMBEDDINGS_ENGINE_DOC', "text-embedding-ada-002")
         self.deployment_name: str = os.getenv("OPENAI_ENGINE", os.getenv("OPENAI_ENGINES", "text-davinci-003"))
         self.deployment_type: str = os.getenv("OPENAI_DEPLOYMENT_TYPE", "Text")
-        self.temperature: float = float(os.getenv("OPENAI_TEMPERATURE", 0.7)) if temperature is None else temperature
+        self.temperature: float = float(os.getenv("OPENAI_TEMPERATURE", 0.0)) if temperature is None else temperature
         self.max_tokens: int = int(os.getenv("OPENAI_MAX_TOKENS", -1)) if max_tokens is None else max_tokens
         self.prompt = PROMPT if custom_prompt == '' else PromptTemplate(template=custom_prompt, input_variables=["summaries", "question"])
         self.vector_store_type = os.getenv("VECTOR_STORE_TYPE")

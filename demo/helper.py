@@ -67,7 +67,7 @@ def get_semantic_answer(question):
     response = openai.Completion.create(
         engine=completion_model,
         prompt=prompt,
-        temperature=0.7,
+        temperature=0.0,
         max_tokens=500,
         top_p=1,
         frequency_penalty=0,

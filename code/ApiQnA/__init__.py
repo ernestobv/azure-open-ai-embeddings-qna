@@ -30,7 +30,7 @@ def main(req: azure.functions.HttpRequest) -> str:
     question = req_body.get('question')
     history = req_body.get('history', [])
     custom_prompt = req_body.get('custom_prompt', "")
-    custom_temperature = float(req_body.get('custom_temperature', os.getenv("OPENAI_TEMPERATURE", 0.7)))
+    custom_temperature = float(req_body.get('custom_temperature', os.getenv("OPENAI_TEMPERATURE", 0.0)))
 
     try:
         logging.info ("ApiQnA question: " + str(question))
