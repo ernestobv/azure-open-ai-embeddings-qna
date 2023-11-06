@@ -93,6 +93,7 @@ class LLMHelper:
         if self.deployment_type == "Chat":
             self.llm: ChatOpenAI = ChatOpenAI(model_name=self.deployment_name, engine=self.deployment_name, temperature=self.temperature, max_tokens=self.max_tokens if self.max_tokens != -1 else None) if llm is None else llm
         else:
+            logging.info("construyendo AzureOpenAI con el parámetro max_tokens = " + self.max_tokens);
             self.llm: AzureOpenAI = AzureOpenAI(deployment_name=self.deployment_name, temperature=self.temperature, max_tokens=self.max_tokens) if llm is None else llm
         if self.vector_store_type == "AzureSearch":
             self.vector_store: VectorStore = AzureSearch(azure_cognitive_search_name=self.vector_store_address, azure_cognitive_search_key=self.vector_store_password, index_name=self.index_name, embedding_function=self.embeddings.embed_query) if vector_store is None else vector_store
@@ -193,11 +194,13 @@ class LLMHelper:
             return_source_documents=True,
             # top_k_docs_for_context= self.k
         )
+        logging.info ("get_semantic_answer_lang_chain 1")
         result = chain({"question": question, "chat_history": chat_history})
+        logging.info ("get_semantic_answer_lang_chain 2")
         sources = "\n".join(set(map(lambda x: x.metadata["source"], result['source_documents'])))
-
+        logging.info ("get_semantic_answer_lang_chain 3")
         container_sas = self.blob_client.get_container_sas()
-
+        logging.info ("get_semantic_answer_lang_chain 4")
         contextDict ={}
         for res in result['source_documents']:
             source_key = self.filter_sourcesLinks(res.metadata['source'].replace('_SAS_TOKEN_PLACEHOLDER_', container_sas)).replace('\n', '').replace(' ', '')
@@ -210,6 +213,8 @@ class LLMHelper:
         result['answer'] = self.clean_encoding(result['answer'])
         sources = sources.replace('_SAS_TOKEN_PLACEHOLDER_', container_sas)
         sources = self.filter_sourcesLinks(sources)
+
+        logging.info ("get_semantic_answer_lang_chain 5")
 
         return question, result['answer'], contextDict, sources
 
