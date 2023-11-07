@@ -91,10 +91,10 @@ class LLMHelper:
         self.text_splitter: TextSplitter = TokenTextSplitter(chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap) if text_splitter is None else text_splitter
         self.embeddings: OpenAIEmbeddings = OpenAIEmbeddings(model=self.model, chunk_size=1) if embeddings is None else embeddings
         if self.deployment_type == "Chat":
-            logging.info("Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + self.max_tokens);
+            logging.info("Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str (self.max_tokens));
             self.llm: ChatOpenAI = ChatOpenAI(model_name=self.deployment_name, engine=self.deployment_name, temperature=self.temperature, max_tokens=self.max_tokens if self.max_tokens != -1 else None) if llm is None else llm
         else:
-            logging.info("No Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + self.max_tokens);
+            logging.info("No Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str(self.max_tokens));
             self.llm: AzureOpenAI = AzureOpenAI(deployment_name=self.deployment_name, temperature=self.temperature, max_tokens=self.max_tokens) if llm is None else llm
         if self.vector_store_type == "AzureSearch":
             self.vector_store: VectorStore = AzureSearch(azure_cognitive_search_name=self.vector_store_address, azure_cognitive_search_key=self.vector_store_password, index_name=self.index_name, embedding_function=self.embeddings.embed_query) if vector_store is None else vector_store
