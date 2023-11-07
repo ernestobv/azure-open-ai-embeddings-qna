@@ -64,6 +64,8 @@ def get_semantic_answer(question):
     prompt = question_prompt.replace("_QUESTION_", question)
     prompt = f"{res_text}\n\n{prompt}"
 
+    logging.info("helper.py - get_semantic_answer - max_tokens = " + 500)
+
     response = openai.Completion.create(
         engine=completion_model,
         prompt=prompt,
