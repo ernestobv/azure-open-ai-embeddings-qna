@@ -41,7 +41,9 @@ def main(req: azure.functions.HttpRequest) -> str:
         pass
 
     # Create LLMHelper object
-    llm_helper = LLMHelper(custom_prompt=custom_prompt, temperature=custom_temperature)
+    k = os.getenv("AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT", 4)
+    logging.info ("AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT = " + str(k))
+    llm_helper = LLMHelper(custom_prompt=custom_prompt, temperature=custom_temperature, k = k)
     # Get answer
     logging.info ("ApiQnA 4")
     data = {}
