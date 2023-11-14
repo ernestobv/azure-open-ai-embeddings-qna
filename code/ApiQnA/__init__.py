@@ -42,7 +42,7 @@ def main(req: azure.functions.HttpRequest) -> str:
 
     # Create LLMHelper object
     k_docs_str = os.getenv("AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT", 4)
-    logging.info ("AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT = " + k_docs_str)
+    logging.info ("AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT = " + str(k_docs_str))
     try:
         k_docs_int = int(k_docs_str)
     except ValueError:
