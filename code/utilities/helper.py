@@ -97,7 +97,7 @@ class LLMHelper:
             logging.info("No Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str(self.max_tokens));
             self.llm: AzureOpenAI = AzureOpenAI(deployment_name=self.deployment_name, temperature=self.temperature, max_tokens=self.max_tokens) if llm is None else llm
         if self.vector_store_type == "AzureSearch":
-            self.vector_store: VectorStore = AzureSearch(azure_cognitive_search_name=self.vector_store_address, azure_cognitive_search_key=self.vector_store_password, index_name=self.index_name, embedding_function=self.embeddings.embed_query) if vector_store is None else vector_store
+            self.vector_store: VectorStore = AzureSearch(azure_cognitive_search_name=self.vector_store_address, azure_cognitive_search_key=self.vector_store_password, index_name=self.index_name, embedding_function=self.embeddings.embed_query, top_k = k) if vector_store is None else vector_store
         else:
             self.vector_store: RedisExtended = RedisExtended(redis_url=self.vector_store_full_address, index_name=self.index_name, embedding_function=self.embeddings.embed_query) if vector_store is None else vector_store   
         self.k : int = 3 if k is None else k
@@ -188,13 +188,12 @@ class LLMHelper:
     def get_semantic_answer_lang_chain(self, question, chat_history):
         question_generator = LLMChain(llm=self.llm, prompt=CONDENSE_QUESTION_PROMPT, verbose=False)
         doc_chain = load_qa_with_sources_chain(self.llm, chain_type="stuff", verbose=False, prompt=self.prompt)
-        logging.info ("get_semantic_answer_lang_chain top_k_docs_for_context = " + str(self.k))
         chain = ConversationalRetrievalChain(
             retriever=self.vector_store.as_retriever(),
             question_generator=question_generator,
             combine_docs_chain=doc_chain,
-            return_source_documents=True,
-            top_k_docs_for_context= self.k
+            return_source_documents=True#,
+            #top_k_docs_for_context= self.k
         )
         logging.info ("get_semantic_answer_lang_chain 1")
         result = chain({"question": question, "chat_history": chat_history})

@@ -52,7 +52,7 @@ FIELDS_METADATA = os.environ.get("AZURESEARCH_FIELDS_TAG", "metadata")
 MAX_UPLOAD_BATCH_SIZE = 1000
 MAX_DELETE_BATCH_SIZE = 1000
 
-def get_search_client(endpoint: str, key: str, index_name: str, semantic_configuration_name:str = None) -> SearchClient:
+def get_search_client(endpoint: str, key: str, index_name: str, semantic_configuration_name:str = None, top_k: int = 4) -> SearchClient:
     if key is None:
         credential = DefaultAzureCredential()
     else:
@@ -84,7 +84,7 @@ def get_search_client(endpoint: str, key: str, index_name: str, semantic_configu
                     name="default",
                     kind="hnsw",
                     hnsw_parameters={
-                        "m": 4,
+                        "m": top_k,
                         "efConstruction": 400,
                         "efSearch": 500,
                         "metric": "cosine"
@@ -123,6 +123,7 @@ class AzureSearch(VectorStore):
         embedding_function: Callable,
         semantic_configuration_name: str = None,
         semantic_query_language: str = "en-us",
+        top_k: int = 4,
         **kwargs: Any,
     ):
         """Initialize with necessary components."""
@@ -141,7 +142,7 @@ class AzureSearch(VectorStore):
         self.semantic_configuration_name = semantic_configuration_name
         self.semantic_query_language = semantic_query_language
         self.client = get_search_client(
-            self.azure_cognitive_search_name, self.azure_cognitive_search_key, self.index_name, self.semantic_configuration_name)
+            self.azure_cognitive_search_name, self.azure_cognitive_search_key, self.index_name, self.semantic_configuration_name, top_k)
 
     def add_texts(
         self,
