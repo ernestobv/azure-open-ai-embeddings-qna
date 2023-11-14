@@ -396,6 +396,10 @@
               "value": "[listAdminKeys(concat('Microsoft.Search/searchServices/', parameters('AzureCognitiveSearch')), '2021-04-01-preview').primaryKey]"
             },
             {
+              "name": "AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT",
+              "value": "8"
+            },
+            {
               "name": "TRANSLATE_ENDPOINT",
               "value": "https://api.cognitive.microsofttranslator.com/"
             },

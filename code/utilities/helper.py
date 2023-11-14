@@ -193,8 +193,8 @@ class LLMHelper:
             retriever=self.vector_store.as_retriever(),
             question_generator=question_generator,
             combine_docs_chain=doc_chain,
-            return_source_documents=True#,
-            #top_k_docs_for_context= self.k
+            return_source_documents=True,
+            top_k_docs_for_context= self.k
         )
         logging.info ("get_semantic_answer_lang_chain 1")
         result = chain({"question": question, "chat_history": chat_history})

@@ -275,6 +275,7 @@ Here is the explanation of the parameters:
 |VECTOR_STORE_TYPE| AzureSearch | Vector Store Type. Use AzureSearch for Azure Cognitive Search, leave it blank for Redis or Azure Cache for Redis Enterprise|
 |AZURE_SEARCH_SERVICE_NAME| YOUR_AZURE_SEARCH_SERVICE_URL | Your Azure Cognitive Search service name. Get it in the [Azure Portal](https://portal.azure.com)|
 |AZURE_SEARCH_ADMIN_KEY| AZURE_SEARCH_ADMIN_KEY | Your Azure Cognitive Search Admin key. Get it in the [Azure Portal](https://portal.azure.com)|
+|AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT| AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT | Number of parrogrhaps to retive
 |REDIS_ADDRESS| api | URL for Redis Stack: "api" for docker compose|
 |REDIS_PORT | 6379 | Port for Redis |
 |REDIS_PASSWORD| redis-stack-password | OPTIONAL - Password for your Redis Stack|
