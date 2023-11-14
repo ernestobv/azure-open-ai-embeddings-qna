@@ -188,12 +188,13 @@ class LLMHelper:
     def get_semantic_answer_lang_chain(self, question, chat_history):
         question_generator = LLMChain(llm=self.llm, prompt=CONDENSE_QUESTION_PROMPT, verbose=False)
         doc_chain = load_qa_with_sources_chain(self.llm, chain_type="stuff", verbose=False, prompt=self.prompt)
+        logging.info ("get_semantic_answer_lang_chain top_k_docs_for_context = " + str(self.k))
         chain = ConversationalRetrievalChain(
             retriever=self.vector_store.as_retriever(),
             question_generator=question_generator,
             combine_docs_chain=doc_chain,
-            return_source_documents=True,
-            # top_k_docs_for_context= self.k
+            return_source_documents=True#,
+            #top_k_docs_for_context= self.k
         )
         logging.info ("get_semantic_answer_lang_chain 1")
         result = chain({"question": question, "chat_history": chat_history})
