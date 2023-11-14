@@ -44,7 +44,7 @@ def main(req: azure.functions.HttpRequest) -> str:
     k_docs_str = os.getenv("AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT", 4)
     logging.info ("AZURE_SEARCH_TOP_K_DOCS_FOR_CONTEXT = " + k_docs_str)
     try:
-        k_docs_int = int(k_docs)
+        k_docs_int = int(k_docs_str)
     except ValueError:
         k_docs_int = 4  
     logging.info ("k_docs_int = " + str(k_docs_int))
