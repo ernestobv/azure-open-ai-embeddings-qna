@@ -272,6 +272,10 @@
             {
               "name": "QUEUE_NAME",
               "value": "[variables('QueueName')]"
+            },
+            {
+              "name": "FUNCTIONS_WORKER_RUNTIME",
+              "value": "python"
             }
           ],
           "cors": {
