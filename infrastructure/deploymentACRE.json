@@ -455,6 +455,10 @@
             {
               "name": "QUEUE_NAME",
               "value": "[variables('QueueName')]"
+            },
+            {
+              "name": "CHUNK_SIZE",
+              "value": "1000"
             }
           ],
           "cors": {
@@ -517,7 +521,8 @@
         "TRANSLATE_ENDPOINT": "[parameters('TranslateEndpoint')]",
         "TRANSLATE_KEY": "[parameters('TranslateKey')]",
         "TRANSLATE_REGION": "[parameters('TranslateRegion')]",
-        "CONVERT_ADD_EMBEDDINGS_URL": "[concat('https://', parameters('FunctionName') , '.azurewebsites.net/api/BatchStartProcessing?code=', variables('ClientKey'))]"
+        "CONVERT_ADD_EMBEDDINGS_URL": "[concat('https://', parameters('FunctionName') , '.azurewebsites.net/api/BatchStartProcessing?code=', variables('ClientKey'))]",
+        "CHUNK_SIZE": 1000
       }
     },
     {

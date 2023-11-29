@@ -91,8 +91,13 @@ class LLMHelper:
         self.text_splitter: TextSplitter = TokenTextSplitter(chunk_size=self.chunk_size, chunk_overlap=self.chunk_overlap) if text_splitter is None else text_splitter
         self.embeddings: OpenAIEmbeddings = OpenAIEmbeddings(model=self.model, chunk_size=1) if embeddings is None else embeddings
         if self.deployment_type == "Chat":
-            logging.info("Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str (self.max_tokens));
-            self.llm: ChatOpenAI = ChatOpenAI(model_name=self.deployment_name, engine=self.deployment_name, temperature=self.temperature, max_tokens=self.max_tokens if self.max_tokens != -1 else None) if llm is None else llm
+            logging.info("Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str (self.max_tokens) + " y timeout de 2 minutos");
+            self.llm: ChatOpenAI = ChatOpenAI(model_name=self.deployment_name, 
+                                              ngine=self.deployment_name, 
+                                              temperature=self.temperature, 
+                                              max_tokens=self.max_tokens if self.max_tokens != -1 else None,
+                                              request_timeout = 120,
+                                              verbose = True) if llm is None else llm
         else:
             logging.info("No Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str(self.max_tokens));
             self.llm: AzureOpenAI = AzureOpenAI(deployment_name=self.deployment_name, temperature=self.temperature, max_tokens=self.max_tokens) if llm is None else llm
