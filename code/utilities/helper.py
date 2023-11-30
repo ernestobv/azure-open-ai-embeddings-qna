@@ -96,7 +96,7 @@ class LLMHelper:
                                               ngine=self.deployment_name, 
                                               temperature=self.temperature, 
                                               max_tokens=self.max_tokens if self.max_tokens != -1 else None,
-                                              request_timeout = 120,
+                                              # request_timeout = 120,
                                               verbose = True) if llm is None else llm
         else:
             logging.info("No Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str(self.max_tokens));
