@@ -93,10 +93,10 @@ class LLMHelper:
         if self.deployment_type == "Chat":
             logging.info("Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str (self.max_tokens) + " y timeout de 2 minutos");
             self.llm: ChatOpenAI = ChatOpenAI(model_name=self.deployment_name, 
-                                              ngine=self.deployment_name, 
+                                              engine=self.deployment_name, 
                                               temperature=self.temperature, 
                                               max_tokens=self.max_tokens if self.max_tokens != -1 else None,
-                                              # request_timeout = 120,
+                                              request_timeout = 120,
                                               verbose = True) if llm is None else llm
         else:
             logging.info("No Chat - construyendo AzureOpenAI con el parámetro max_tokens = " + str(self.max_tokens));
