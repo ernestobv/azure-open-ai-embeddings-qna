@@ -84,13 +84,6 @@
         "description": "Name of Function App for Batch document processing"
       }
     },
-    "ApplicationInsightsName": {
-      "type": "string",
-      "defaultValue": "[concat(parameters('ResourcePrefixOldResources'), '-appinsights')]",
-      "metadata": {
-        "description": "Name of Application Insights"
-      }
-    },
     "FormRecognizerName": {
       "type": "string",
       "defaultValue": "[concat(parameters('ResourcePrefixOldResources'), '-formrecog')]",
@@ -188,10 +181,6 @@
             {
               "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
               "value": "false"
-            },
-            {
-              "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-              "value": "[reference(resourceId('Microsoft.Insights/components', parameters('ApplicationInsightsName')), '2015-05-01').InstrumentationKey]"
             },
             {
               "name": "AzureWebJobsStorage",
@@ -318,7 +307,6 @@
         "[resourceId('Microsoft.Web/sites', parameters('WebsiteName'))]"
       ],
       "properties": {
-        "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', parameters('ApplicationInsightsName')), '2015-05-01').InstrumentationKey]",
         "OPENAI_ENGINE": "[parameters('OpenAIEngine')]",
         "OPENAI_DEPLOYMENT_TYPE": "[parameters('OpenAIDeploymentType')]",
         "OPENAI_EMBEDDINGS_ENGINE_DOC": "[parameters('OpenAIEmbeddingsEngineDoc')]",
