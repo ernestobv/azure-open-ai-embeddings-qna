@@ -13,7 +13,7 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base =  os.getenv("OPENAI_API_BASE")
 openai.api_type = 'azure'
-openai.api_version = '2022-12-01'
+openai.api_version = '2023-05-15'
 completion_model = os.getenv("OPENAI_ENGINES").split(',')[0]
 embedding_model = os.getenv("OPENAI_EMBEDDINGS_ENGINE_DOC")
 question_prompt = os.getenv("QUESTION_PROMPT").replace(r'\n', '\n')
