@@ -45,6 +45,8 @@ Deploy all components: [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](
 
 Deploy only web and functions: [![Deploy App & Funcs](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fernestobv%2Fazure-open-ai-embeddings-qna%2Fmain%2Finfrastructure%2Fdeployment_ACS_mini.json)
 
+Deploy all components except Application Insights:[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fernestobv%2Fazure-open-ai-embeddings-qna%2Fmain%2Finfrastructure%2Fdeployment_ACS_no_app_insights.json)
+
 Click on the Deploy to Azure button and configure your settings in the Azure Portal as described in the [Environment variables](#environment-variables) section.
 
 ![Architecture](docs/architecture_acs.png)
